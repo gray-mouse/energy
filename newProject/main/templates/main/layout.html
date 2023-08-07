@@ -1,0 +1,58 @@
+<!-- шаблон, который наследуется другми файлами для html странички -->
+
+{% load static %} <!-- указываем, что в этом документе будем работать с статическими файлами -->
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}{% endblock %}</title>  <!-- да, да, тут та самая секция, так же и в остальных -->
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}"> <!-- подключаем скелетон -->
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}"> <!-- подключаем статический файл -->
+
+</head>
+<body>
+
+    <aside>
+        <img src="{% static 'main/img/logo-2.svg' %}"  alt="Логотип">
+        <span class="logo">Энергия</span> <!-- класс добавленной картинки -->
+        <h3>Навигация</h3>
+
+        <ul>
+            <a href="{% url 'energy_saving' %}">
+                <li>
+                Энергосбережение в энергетике
+                </li>
+            </a>
+
+            <a href="{% url 'energy_efficiency' %}">
+                <li>
+                Энергоэффективность в энергетике
+                </li>
+            </a>
+
+            <a href="{% url 'nuclear_energy' %}">
+                <li>
+                Ядерная энергетика
+                </li>
+            </a>
+
+        </ul>
+    </aside>
+
+
+    <main>
+
+    </main>
+
+        {% block content %}  <!-- шаблонизатор Jinja, между этими конструкциями вставляем код -->
+        {% endblock %}  <!-- закрытие конструкции -->
+        <!-- в теге main будет динамический блок который будет меняться -->
+</body>
+</html>
+
+

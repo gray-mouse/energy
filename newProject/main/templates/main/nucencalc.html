@@ -1,0 +1,43 @@
+{% extends 'main/layout.html' %}    <!-- наследуем всё от файла layout.html -->
+
+{% block title %}Расчёт{% endblock %}  <!-- сюда помещаем html код (секции из файла layout) -->
+
+{% block content %} <!-- сюда помещаем html код -->
+
+<div class="calculate">
+
+    <form action="{% url 'nuclear_energy' %}">
+                <button class="btn btn-info">Вернуться назад</button>
+            </form>
+
+    <h1>Формула расчёта массо-энергетического эквивалента</h1>
+    <h1>E = mc^2</h1>
+
+    <body>
+        <form method="post" action="{% url 'calculate_nuclear_energy' %}">
+
+        {% csrf_token %}
+
+            <label for="m">Введите значение массы частицы m:</label>
+            <input required type="number" id="m" name="m">
+            <br>
+            <label for="c">Введите значение скорости света c:</label>
+            <input required type="number" id="c" name="c">
+            <br>
+
+        <button type="submit" class="btn btn-info">Расчитать</button>
+
+        </form>
+
+    {% if result %}
+        <h1>Массо-энергетический эквивалент E={{ result }}</h1>
+    {% endif %}
+
+    </body>
+
+</div>
+
+
+
+
+{% endblock %}

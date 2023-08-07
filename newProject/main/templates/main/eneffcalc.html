@@ -1,0 +1,44 @@
+{% extends 'main/layout.html' %}    <!-- наследуем всё от файла layout.html -->
+
+{% block title %}Расчёт{% endblock %}  <!-- сюда помещаем html код (секции из файла layout) -->
+
+{% block content %} <!-- сюда помещаем html код -->
+
+<div class="calculate">
+
+    <form action="{% url 'energy_efficiency' %}">
+                <button class="btn btn-danger">Вернуться назад</button>
+            </form>
+
+    <h1>Формула расчёта энергетической эффективности (COP) <br>
+    для охладительных установок</h1>
+    <h1>COP = Q/W</h1>
+
+    <body>
+        <form method="post" action="{% url 'calculate_energy_efficiency' %}">
+
+        {% csrf_token %}
+
+            <label for="q">Введите значение теплового эффекта (холода) Q:</label>
+            <input required type="number" id="q" name="q">
+            <br>
+            <label for="w">Введите значение электропотребления полученного холода W:</label>
+            <input required type="number" id="w" name="w">
+            <br>
+
+        <button type="submit" class="btn btn-danger">Расчитать</button>
+
+        </form>
+
+    {% if result %}
+        <h1>Энергетическая эффективность COP={{ result }}</h1>
+    {% endif %}
+
+    </body>
+
+</div>
+
+
+
+
+{% endblock %}

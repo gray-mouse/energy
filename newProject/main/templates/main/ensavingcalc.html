@@ -1,0 +1,44 @@
+{% extends 'main/layout.html' %}    <!-- наследуем всё от файла layout.html -->
+
+{% block title %}Расчёт{% endblock %}  <!-- сюда помещаем html код (секции из файла layout) -->
+
+{% block content %} <!-- сюда помещаем html код -->
+
+<div class="calculate">
+
+    <form action="{% url 'energy_saving' %}">
+                <button class="btn btn-warning">Вернуться назад</button>
+            </form>
+
+    <h1>Формула расчёта энергосбережения <br>
+    (формула Карно)</h1>
+    <h1>η = 1 - Tc/Th</h1>
+
+    <body>
+        <form method="post" action="{% url 'energy_saving_calc' %}">
+
+        {% csrf_token %}
+
+            <label for="Tc">Введите значение температуры рабочего тела на выходе из системы Tc:</label>
+            <input required type="number" id="Tc" name="Tc">
+            <br>
+            <label for="Th">Введите значение температуры источника тепла Th:</label>
+            <input required type="number" id="Th" name="Th">
+            <br>
+
+        <button type="submit" class="btn btn-warning">Расчитать</button>
+
+        </form>
+
+    {% if result %}
+        <h1>Эффективность теплопередачи η={{ result }}</h1>
+    {% endif %}
+
+    </body>
+
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,3 @@
+0. Before you running project make shure you have installed Django (pip install django)
+1. Start .bat file "runApp.bat"
+2. Open shortcut "Энергия"
